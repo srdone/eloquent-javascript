@@ -1,23 +1,34 @@
+var assert = require('assert');
 // Loop a triangle
 
 var loopTriangle = function loopTriangle (rows) {
   var totalRows = rows || 8;
-  var stringToPrint = '*';
+  var currentString = '*';
+  var result = [];
 
   for (var i = 0; i < totalRows; i++) {
-    console.log(stringToPrint);
-    stringToPrint = stringToPrint + '*';
+    result.push(currentString);
+    currentString = currentString + '*';
   }
+
+  return result;
 };
 
 console.log('Loop triangle, no arguments:');
-loopTriangle();
+console.log(loopTriangle());
+assert.deepEqual(
+  loopTriangle(),
+  ['*', '**', '***', '****', '*****', '******', '*******', '********']
+);
+console.log('success');
 
 console.log('Loop triangle, passing 4 as argument:');
-loopTriangle(4);
-
-console.log('Loop triangle, passing 10 as argument:');
-loopTriangle(10);
+console.log(loopTriangle(4));
+assert.deepEqual(
+  loopTriangle(4),
+  ['*', '**', '***', '****']
+);
+console.log('success');
 
 console.log('\n\n');
 
@@ -25,6 +36,7 @@ console.log('\n\n');
 console.log('FizzBuzz\n');
 
 var fizzBuzz = function fizzBuzz (max) {
+  var result = [];
   var maxNumber = max || 100;
 
   var divisibleByX = function divisibleBy3 (number, x) {
@@ -33,16 +45,23 @@ var fizzBuzz = function fizzBuzz (max) {
 
   for (var i = 1; i <= maxNumber; i++) {
     if (divisibleByX(i, 3) && !divisibleByX(i, 5)) {
-      console.log('Fizz');
+      result.push('Fizz');
     } else if (divisibleByX(i, 5) && !divisibleByX(i, 3)) {
-      console.log('Buzz');
+      result.push('Buzz');
     } else if (divisibleByX(i, 5) && divisibleByX(i, 3)) {
-      console.log('FizzBuzz');
+      result.push('FizzBuzz');
     } else {
-      console.log(i);
+      result.push(i);
     }
   }
+
+  return result;
 };
 
 console.log('fizzBuzz, limit of 20');
-fizzBuzz(20);
+console.log(fizzBuzz(20));
+assert.deepEqual(
+  fizzBuzz(20),
+  [1, 2, 'Fizz', 4, 'Buzz', 'Fizz', 7, 8, 'Fizz', 'Buzz', 11, 'Fizz', 13, 14, 'FizzBuzz', 16, 17, 'Fizz', 19, 'Buzz']
+);
+console.log('success');
